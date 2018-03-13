@@ -177,7 +177,7 @@ def textMessage(bot, update):
     elif 'кто отсутствует' in message.lower() and chat_id in adm_ids:
 
         users = ', '.join(get_who_away())
-        text = 'Сейча отсутствуют - {}'.format(users)
+        text = 'Cейчаc отcутcтвуют - {}'.format(users)
         bot.send_message(chat_id=update.message.chat_id, text=text)
 
     elif 'кто сколько отсутствовал' in message.lower() and chat_id in adm_ids:
@@ -193,9 +193,11 @@ def textMessage(bot, update):
                 time = int(i.split(':')[1])
                 d[i.split(',')[0]] += time
         names = [i for i in d]
+        text = u"\n"
+        texts = []
         for i in names:
-            text = '{} отсутствовал(а) {} мин.'.format(i, d[i])
-            bot.send_message(chat_id=update.message.chat_id, text=text)
+            texts.append('{} отсутствовал(а) {} мин.'.format(i, d[i]))
+        bot.send_message(chat_id=update.message.chat_id, text=text.join(texts))
 
     elif bool(list(set(text_come) & set(message.lower().split(' ')))):
 
